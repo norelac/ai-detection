@@ -12,31 +12,27 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--background-color);
     }
     
     .page-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2em;
         margin-bottom: 0.5rem;
     }
     
     .page-subtitle {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1em;
         font-weight: 400;
         margin-bottom: 2rem;
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.4em;
         font-weight: 600;
         margin: 1.5rem 0 1rem 0;
@@ -45,47 +41,51 @@ st.markdown("""
     }
     
     .info-card {
-        background: #f0f7ff;
+        background-color: rgba(37, 99, 235, 0.1);
         border-left: 4px solid #2563eb;
         padding: 1.5rem;
         border-radius: 8px;
+        color: var(--text-color);
         margin: 1rem 0;
     }
     
     .info-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
     
     .info-text {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.9;
         line-height: 1.6;
     }
     
     .stat-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
     }
     
     .image-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
     }
     
     .feature-bar {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 8px;
         padding: 1rem;
         margin: 0.5rem 0;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
     }
     
     .bar-fill {
@@ -144,10 +144,10 @@ if os.path.exists('reports/feature_importance.csv'):
         st.markdown(f"""
         <div class='feature-bar'>
             <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;'>
-                <span style='color: #1a1a1a; font-weight: 600;'>{feature_name}</span>
+                <span style='color: var(--text-color); font-weight: 600;'>{feature_name}</span>
                 <span style='color: #2563eb; font-weight: 700;'>{importance:.4f}</span>
             </div>
-            <div style='background: #e8e8e8; border-radius: 4px; height: 8px;'>
+            <div style='background: var(--border-color); border-radius: 4px; height: 8px;'>
                 <div class='bar-fill' style='width: {bar_width}%;'></div>
             </div>
         </div>
@@ -168,8 +168,8 @@ col1, col2 = st.columns(2, gap="large")
 with col1:
     st.markdown("""
     <div class='stat-card'>
-        <p style='font-weight: 700; margin-bottom: 15px; color: #1a1a1a;'>🎯 High Impact Features</p>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <p style='font-weight: 700; margin-bottom: 15px; color: var(--text-color);'>🎯 High Impact Features</p>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li><strong>N-grams</strong> paling penting untuk deteksi</li>
             <li><strong>Word combinations</strong> menunjukkan pattern AI</li>
             <li><strong>Punctuation patterns</strong> berbeda AI vs manusia</li>
@@ -181,8 +181,8 @@ with col1:
 with col2:
     st.markdown("""
     <div class='stat-card'>
-        <p style='font-weight: 700; margin-bottom: 15px; color: #1a1a1a;'>🔍 Model Logic</p>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <p style='font-weight: 700; margin-bottom: 15px; color: var(--text-color);'>🔍 Model Logic</p>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>AI text lebih <strong>konsisten</strong> dalam struktur</li>
             <li>Human text lebih <strong>bervariasi</strong> dalam gaya</li>
             <li>AI lebih formal dengan <strong>pola repetitif</strong></li>

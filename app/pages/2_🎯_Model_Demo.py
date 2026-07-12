@@ -14,63 +14,62 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--background-color);
     }
     
     .page-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2em;
         margin-bottom: 0.5rem;
     }
     
     .page-subtitle {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1em;
         font-weight: 400;
         margin-bottom: 1.5rem;
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.3em;
         font-weight: 600;
         margin: 1.5rem 0 1rem 0;
     }
     
     .info-box {
-        background: #f0f7ff;
+        background-color: rgba(37, 99, 235, 0.1);
         border-left: 4px solid #2563eb;
         padding: 1.2rem;
         border-radius: 8px;
+        color: var(--text-color);
         margin: 1rem 0;
     }
     
     .info-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
     
     .info-text {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.9;
         font-size: 0.95em;
     }
     
     .result-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
         text-align: center;
         margin: 1.5rem 0;
+        color: var(--text-color);
     }
     
     .result-human {
@@ -82,7 +81,8 @@ st.markdown("""
     }
     
     .result-label {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 0.9em;
         margin-bottom: 0.5rem;
     }
@@ -102,16 +102,18 @@ st.markdown("""
     }
     
     .confidence-box {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
         text-align: center;
+        color: var(--text-color);
     }
     
     .confidence-label {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 0.9em;
         margin-bottom: 0.5rem;
     }
@@ -124,7 +126,7 @@ st.markdown("""
     
     .stButton>button {
         background: #2563eb;
-        color: white;
+        color: white !important;
         border: none;
         border-radius: 8px;
         font-weight: 600;
@@ -135,19 +137,6 @@ st.markdown("""
     .stButton>button:hover {
         background: #1d4ed8;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
-    
-    .stMetric {
-        background: white;
-        padding: 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #e8e8e8;
-    }
-    
-    .stTextArea textarea {
-        border-radius: 10px !important;
-        border: 1px solid #e8e8e8 !important;
-        color: #1a1a1a !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -217,7 +206,7 @@ if model and preprocessing:
                             <div class='result-card result-human'>
                                 <div class='result-label'>Hasil Prediksi</div>
                                 <div class='result-title'>✅ HUMAN WRITTEN</div>
-                                <div style='color: #4a4a4a; font-size: 0.95em;'>Teks ini kemungkinan besar ditulis oleh manusia</div>
+                                <div style='opacity: 0.9; font-size: 0.95em;'>Teks ini kemungkinan besar ditulis oleh manusia</div>
                             </div>
                             """, unsafe_allow_html=True)
                         
@@ -237,7 +226,7 @@ if model and preprocessing:
                             <div class='result-card result-ai'>
                                 <div class='result-label'>Hasil Prediksi</div>
                                 <div class='result-title'>🤖 AI GENERATED</div>
-                                <div style='color: #4a4a4a; font-size: 0.95em;'>Teks ini kemungkinan besar dihasilkan oleh AI</div>
+                                <div style='opacity: 0.9; font-size: 0.95em;'>Teks ini kemungkinan besar dihasilkan oleh AI</div>
                             </div>
                             """, unsafe_allow_html=True)
                         
@@ -267,14 +256,15 @@ if model and preprocessing:
                                textposition='outside')
                     ])
                     
+                    # Adapt chart color to theme (dark or light grid lines)
                     fig.update_layout(
                         height=300,
                         showlegend=False,
                         plot_bgcolor='rgba(0,0,0,0)',
                         paper_bgcolor='rgba(0,0,0,0)',
-                        font=dict(color='#1a1a1a', family='Inter'),
+                        font=dict(color='gray', family='Inter'),
                         yaxis_title="Probability (%)",
-                        yaxis=dict(gridcolor='#e8e8e8')
+                        yaxis=dict(gridcolor='rgba(128,128,128,0.2)')
                     )
                     
                     st.plotly_chart(fig, use_container_width=True)

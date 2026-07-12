@@ -10,31 +10,27 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--background-color);
     }
     
     .page-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2em;
         margin-bottom: 0.5rem;
     }
     
     .page-subtitle {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1em;
         font-weight: 400;
         margin-bottom: 2rem;
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.4em;
         font-weight: 600;
         margin: 1.5rem 0 1rem 0;
@@ -43,29 +39,31 @@ st.markdown("""
     }
     
     .doc-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
         margin: 1.5rem 0;
     }
     
     .doc-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         font-size: 1.2em;
         margin-bottom: 1rem;
     }
     
     .doc-text {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.8;
         line-height: 1.8;
     }
     
     .tech-badge {
-        background: #2563eb;
-        color: white;
+        background-color: #2563eb;
+        color: white !important;
         padding: 0.4rem 0.9rem;
         border-radius: 20px;
         font-weight: 500;
@@ -93,13 +91,14 @@ st.markdown("""
     }
     
     .metric-label {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 0.9em;
         margin-top: 0.3rem;
     }
     
     .code-box {
-        background: #1a1a2e;
+        background-color: #1a1a2e;
         border-radius: 8px;
         padding: 1.5rem;
         color: #00ff00;
@@ -108,10 +107,11 @@ st.markdown("""
     }
     
     .info-section {
-        background: #f0f7ff;
+        background-color: rgba(37, 99, 235, 0.1);
         border-left: 4px solid #2563eb;
         padding: 1.5rem;
         border-radius: 8px;
+        color: var(--text-color);
         margin: 1rem 0;
     }
 </style>
@@ -146,11 +146,11 @@ with col1:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>📁 DAIGT V2 Dataset</h4>
-        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Total Samples:</strong> 44,868 essays</p>
-        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Human Written:</strong> 27,371 (61.0%)</p>
-        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>AI Generated:</strong> 17,497 (39.0%)</p>
-        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Split:</strong> 70% Train, 15% Val, 15% Test</p>
-        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Source:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>Kaggle - DAIGT V2</a></p>
+        <p style='margin: 0.5rem 0;'><strong>Total Samples:</strong> 44,868 essays</p>
+        <p style='margin: 0.5rem 0;'><strong>Human Written:</strong> 27,371 (61.0%)</p>
+        <p style='margin: 0.5rem 0;'><strong>AI Generated:</strong> 17,497 (39.0%)</p>
+        <p style='margin: 0.5rem 0;'><strong>Split:</strong> 70% Train, 15% Val, 15% Test</p>
+        <p style='margin: 0.5rem 0;'><strong>Source:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>Kaggle - DAIGT V2</a></p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -158,7 +158,7 @@ with col2:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>🔍 Data Characteristics</h4>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>Multiple AI sources (GPT, Claude, dll)</li>
             <li>Diverse essay topics</li>
             <li>Varied writing styles</li>
@@ -174,21 +174,21 @@ st.markdown("""
 <div class='doc-card'>
     <h4 class='doc-title'>Feature Engineering Pipeline</h4>
     <div class='info-section'>
-        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>1. TF-IDF Vectorization (Word-level)</p>
-        <ul style='margin-left: 20px; color: #4a4a4a;'>
+        <p style='margin: 0.8rem 0; font-weight: 600;'>1. TF-IDF Vectorization (Word-level)</p>
+        <ul style='margin-left: 20px;'>
             <li>5,000 features | N-grams (1-2)</li>
             <li>Captures word frequency patterns</li>
             <li>Stop words removed</li>
         </ul>
         
-        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>2. Character N-grams</p>
-        <ul style='margin-left: 20px; color: #4a4a4a;'>
+        <p style='margin: 0.8rem 0; font-weight: 600;'>2. Character N-grams</p>
+        <ul style='margin-left: 20px;'>
             <li>3,000 features | N-grams (2-4)</li>
             <li>Captures character-level patterns</li>
             <li>Robust to typos and variations</li>
         </ul>
         
-        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>3. Total: 8,000 Combined Features</p>
+        <p style='margin: 0.8rem 0; font-weight: 600;'>3. Total: 8,000 Combined Features</p>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -201,7 +201,7 @@ with col1:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>📊 Baseline: Logistic Regression</h4>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>Fast training & inference</li>
             <li>Highly interpretable</li>
             <li>F1-Score: 99.21%</li>
@@ -214,7 +214,7 @@ with col2:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>🏆 Primary: XGBoost</h4>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>Gradient boosting algorithm</li>
             <li>Handles non-linearity well</li>
             <li>F1-Score: 98.52%</li>
@@ -256,10 +256,10 @@ with col1:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>🐍 Python Libraries</h4>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Pandas, NumPy</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Scikit-learn</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• XGBoost</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• SHAP</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Pandas, NumPy</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Scikit-learn</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• XGBoost</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• SHAP</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -267,10 +267,10 @@ with col2:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>📊 Visualization</h4>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Matplotlib</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Seaborn</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Plotly</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• WordCloud</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Matplotlib</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Seaborn</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Plotly</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• WordCloud</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -278,10 +278,10 @@ with col3:
     st.markdown("""
     <div class='doc-card'>
         <h4 class='doc-title'>🚀 Deployment</h4>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Streamlit</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Joblib</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• GitHub</p>
-        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Streamlit Cloud</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Streamlit</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Joblib</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• GitHub</p>
+        <p style='margin: 0.3rem 0; opacity: 0.8;'>• Streamlit Cloud</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -304,9 +304,9 @@ st.markdown("<h2 class='section-title'>📞 Resources</h2>", unsafe_allow_html=T
 st.markdown("""
 <div class='doc-card'>
     <h4 class='doc-title'>📚 References & Links</h4>
-    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>Dataset:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>DAIGT V2 - Kaggle</a></p>
-    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>XGBoost:</strong> <a href='https://xgboost.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
-    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>SHAP:</strong> <a href='https://shap.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
-    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>Streamlit:</strong> <a href='https://docs.streamlit.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+    <p style='margin: 0.8rem 0;'><strong>Dataset:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>DAIGT V2 - Kaggle</a></p>
+    <p style='margin: 0.8rem 0;'><strong>XGBoost:</strong> <a href='https://xgboost.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+    <p style='margin: 0.8rem 0;'><strong>SHAP:</strong> <a href='https://shap.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+    <p style='margin: 0.8rem 0;'><strong>Streamlit:</strong> <a href='https://docs.streamlit.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
 </div>
 """, unsafe_allow_html=True)

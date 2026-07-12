@@ -12,31 +12,27 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--background-color);
     }
     
     .page-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2em;
         margin-bottom: 0.5rem;
     }
     
     .page-subtitle {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1em;
         font-weight: 400;
         margin-bottom: 2rem;
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.4em;
         font-weight: 600;
         margin: 1.5rem 0 1rem 0;
@@ -45,55 +41,41 @@ st.markdown("""
     }
     
     .stat-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
     }
     
     .image-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
-    }
-    
-    .stMetric {
-        background: white;
-        padding: 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #e8e8e8;
-    }
-    
-    .stMetric label {
-        color: #666666 !important;
-        font-weight: 500 !important;
-    }
-    
-    .stMetric [data-testid="stMetricValue"] {
-        color: #1a1a1a !important;
-        font-weight: 700 !important;
+        border: 1px solid var(--border-color);
     }
     
     .info-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         border-left: 4px solid #2563eb;
+        color: var(--text-color);
         margin: 1rem 0;
     }
     
     .info-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         margin-bottom: 0.8rem;
     }
     
     .info-content {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.8;
         line-height: 1.6;
     }
 </style>
@@ -170,8 +152,8 @@ col1, col2 = st.columns(2, gap="large")
 with col1:
     st.markdown("""
     <div class='stat-card'>
-        <p style='font-weight: 700; margin-bottom: 15px; color: #1a1a1a;'>✅ Kelebihan Model</p>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <p style='font-weight: 700; margin-bottom: 15px; color: var(--text-color);'>✅ Kelebihan Model</p>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>F1-Score sangat tinggi (98.52%)</li>
             <li>ROC-AUC luar biasa (99.88%)</li>
             <li>Recall tinggi mengurangi false negatives</li>
@@ -184,8 +166,8 @@ with col1:
 with col2:
     st.markdown("""
     <div class='stat-card'>
-        <p style='font-weight: 700; margin-bottom: 15px; color: #1a1a1a;'>⚠️ Limitasi Model</p>
-        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+        <p style='font-weight: 700; margin-bottom: 15px; color: var(--text-color);'>⚠️ Limitasi Model</p>
+        <ul style='margin-left: 20px; line-height: 1.8; color: var(--text-color); opacity: 0.8;'>
             <li>Proses training memerlukan resources lebih</li>
             <li>Sensitif terhadap hyperparameter tuning</li>
             <li>Kurang akurat pada teks sangat pendek (<50 karakter)</li>

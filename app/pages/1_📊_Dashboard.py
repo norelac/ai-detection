@@ -12,31 +12,27 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+    [data-testid="stAppViewContainer"] {
+        background-color: var(--background-color);
     }
     
     .page-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2em;
         margin-bottom: 0.5rem;
     }
     
     .page-subtitle {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1em;
         font-weight: 400;
         margin-bottom: 2rem;
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.4em;
         font-weight: 600;
         margin: 1.5rem 0 1rem 0;
@@ -45,45 +41,41 @@ st.markdown("""
     }
     
     .stat-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
     }
     
     .image-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
-    }
-    
-    .stMetric {
-        background: white;
-        padding: 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
     }
     
     .insight-box {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.5rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         border-left: 4px solid #2563eb;
+        color: var(--text-color);
         margin: 1rem 0;
     }
     
     .insight-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         margin-bottom: 0.8rem;
     }
     
     .insight-content {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.8;
         line-height: 1.6;
     }
 </style>
@@ -167,7 +159,7 @@ if df is not None:
     with col1:
         st.markdown("""
         <div class='insight-box'>
-            <div class='insight-title'>✍️ Human Written Text</div>
+            <div class='insight-title'>👤 Human Written Text</div>
             <div class='insight-content'>
             • Lebih variatif dalam pemilihan kosakata<br>
             • Gaya penulisan kurang konsisten (lebih natural)<br>

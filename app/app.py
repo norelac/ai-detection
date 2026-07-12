@@ -20,42 +20,36 @@ st.markdown("""
         font-family: 'Inter', sans-serif;
     }
     
-    [data-testid="stMainBlockContainer"] {
-        background: #f8f9fa;
-        padding: 2rem;
-    }
-    
+    /* Menggunakan CSS variables agar adaptif terhadap Light/Dark mode */
     [data-testid="stAppViewContainer"] {
-        background: #f8f9fa;
-    }
-    
-    [data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #e0e0e0;
+        background-color: var(--background-color);
     }
     
     .main-header {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 700;
         font-size: 2.5em;
         margin-bottom: 0.3rem;
     }
     
     .sub-header {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 1.1em;
         font-weight: 400;
         margin-bottom: 2rem;
     }
     
+    /* Card tetap putih/terang untuk menjaga style 'Professional' */
     .metric-card {
-        background: white;
+        background-color: var(--secondary-background-color);
         border-radius: 12px;
         padding: 1.8rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border: 1px solid #e8e8e8;
+        border: 1px solid var(--border-color);
         transition: all 0.3s ease;
         height: 100%;
+        color: var(--text-color);
     }
     
     .metric-card:hover {
@@ -71,7 +65,8 @@ st.markdown("""
     }
     
     .metric-label {
-        color: #666666;
+        color: var(--text-color);
+        opacity: 0.7;
         font-size: 0.95em;
         font-weight: 500;
     }
@@ -82,7 +77,7 @@ st.markdown("""
     }
     
     .section-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-size: 1.5em;
         font-weight: 600;
         margin: 2rem 0 1rem 0;
@@ -91,51 +86,36 @@ st.markdown("""
     }
     
     .info-box {
-        background: #f0f7ff;
+        background-color: rgba(37, 99, 235, 0.1);
         border-left: 4px solid #2563eb;
         padding: 1.5rem;
         border-radius: 8px;
+        color: var(--text-color);
         margin: 1.5rem 0;
     }
     
     .info-box-title {
-        color: #1a1a1a;
+        color: var(--text-color);
         font-weight: 600;
         font-size: 1.1em;
         margin-bottom: 0.8rem;
     }
     
     .info-box-content {
-        color: #4a4a4a;
+        color: var(--text-color);
+        opacity: 0.9;
         line-height: 1.8;
-    }
-    
-    .stMetric {
-        background: white;
-        padding: 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #e8e8e8;
-    }
-    
-    .stMetric label {
-        color: #666666 !important;
-        font-weight: 500 !important;
-    }
-    
-    .stMetric [data-testid="stMetricValue"] {
-        color: #1a1a1a !important;
-        font-weight: 700 !important;
     }
     
     .divider {
         height: 1px;
-        background: #e0e0e0;
+        background: var(--border-color);
         margin: 2rem 0;
     }
     
     .stButton>button {
         background: #2563eb;
-        color: white;
+        color: white !important;
         border: none;
         border-radius: 8px;
         padding: 0.6rem 1.5rem;
@@ -237,17 +217,17 @@ def main():
     with col1:
         st.markdown("""
         <div class='metric-card'>
-            <h3 style='color: #1a1a1a; margin-bottom: 1rem;'>📈 Dataset Information</h3>
-            <table style='width: 100%; color: #4a4a4a;'>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+            <h3 style='color: var(--text-color); margin-bottom: 1rem;'>📈 Dataset Information</h3>
+            <table style='width: 100%; color: var(--text-color);'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>Total Samples</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>44,868</td>
                 </tr>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>Human Text</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>27,371 (61.0%)</td>
                 </tr>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>AI Text</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>17,497 (39.0%)</td>
                 </tr>
@@ -262,17 +242,17 @@ def main():
     with col2:
         st.markdown("""
         <div class='metric-card'>
-            <h3 style='color: #1a1a1a; margin-bottom: 1rem;'>🛠️ Tech Stack</h3>
-            <table style='width: 100%; color: #4a4a4a;'>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+            <h3 style='color: var(--text-color); margin-bottom: 1rem;'>🛠️ Tech Stack</h3>
+            <table style='width: 100%; color: var(--text-color);'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>ML Framework</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>XGBoost, Scikit-learn</td>
                 </tr>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>Features</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>TF-IDF + Char n-grams</td>
                 </tr>
-                <tr style='border-bottom: 1px solid #e8e8e8;'>
+                <tr style='border-bottom: 1px solid var(--border-color);'>
                     <td style='padding: 0.5rem 0; font-weight: 500;'>Interpretation</td>
                     <td style='padding: 0.5rem 0; text-align: right;'>SHAP</td>
                 </tr>
