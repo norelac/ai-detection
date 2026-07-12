@@ -2,175 +2,311 @@ import streamlit as st
 
 st.set_page_config(page_title="Documentation", page_icon="📚", layout="wide")
 
-st.title("📚 Documentation")
-st.markdown("---")
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    [data-testid="stMainBlockContainer"] {
+        background: #f8f9fa;
+    }
+    
+    [data-testid="stSidebar"] {
+        background: #ffffff;
+        border-right: 1px solid #e0e0e0;
+    }
+    
+    .page-header {
+        color: #1a1a1a;
+        font-weight: 700;
+        font-size: 2em;
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-subtitle {
+        color: #666666;
+        font-size: 1em;
+        font-weight: 400;
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        color: #1a1a1a;
+        font-size: 1.4em;
+        font-weight: 600;
+        margin: 1.5rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #2563eb;
+    }
+    
+    .doc-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e8e8e8;
+        margin: 1.5rem 0;
+    }
+    
+    .doc-title {
+        color: #1a1a1a;
+        font-weight: 600;
+        font-size: 1.2em;
+        margin-bottom: 1rem;
+    }
+    
+    .doc-text {
+        color: #4a4a4a;
+        line-height: 1.8;
+    }
+    
+    .tech-badge {
+        background: #2563eb;
+        color: white;
+        padding: 0.4rem 0.9rem;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.9em;
+        display: inline-block;
+        margin: 0.3rem;
+    }
+    
+    .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .metric-item {
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .metric-value {
+        font-size: 2em;
+        font-weight: 700;
+        color: #2563eb;
+    }
+    
+    .metric-label {
+        color: #666666;
+        font-size: 0.9em;
+        margin-top: 0.3rem;
+    }
+    
+    .code-box {
+        background: #1a1a2e;
+        border-radius: 8px;
+        padding: 1.5rem;
+        color: #00ff00;
+        font-family: 'Courier New', monospace;
+        margin: 1rem 0;
+    }
+    
+    .info-section {
+        background: #f0f7ff;
+        border-left: 4px solid #2563eb;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+    }
+</style>
+""", unsafe_allow_html=True)
 
-st.header("Project Overview")
+st.markdown("<h1 class='page-header'>📚 Project Documentation</h1>", unsafe_allow_html=True)
+st.markdown("<p class='page-subtitle'>Panduan lengkap sistem AI Text Detection</p>", unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>🎯 Project Overview</h2>", unsafe_allow_html=True)
 
 st.markdown("""
-### AI-Generated Text Detection
+<div class='doc-card'>
+    <h3 class='doc-title'>AI-Generated Text Detection System</h3>
+    <p class='doc-text'>
+    Sistem machine learning untuk mendeteksi apakah sebuah teks ditulis oleh manusia atau dihasilkan oleh AI (Large Language Models). Dengan akurasi <strong>98.86%</strong>, sistem ini membantu menjaga integritas akademik dan transparansi konten digital.
+    </p>
+    <div style='margin-top: 1.5rem;'>
+        <span class='tech-badge'>Machine Learning</span>
+        <span class='tech-badge'>NLP</span>
+        <span class='tech-badge'>Binary Classification</span>
+        <span class='tech-badge'>XGBoost</span>
+        <span class='tech-badge'>SHAP</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
-This project aims to build a machine learning model that can distinguish between human-written and AI-generated text.
+st.markdown("<h2 class='section-title'>📊 Dataset Information</h2>", unsafe_allow_html=True)
 
-**Motivation:**
-The rapid advancement of Large Language Models (LLMs) like GPT-3.5, GPT-4 has made it increasingly difficult to differentiate AI-generated text from human-written content. This poses challenges in:
-- Academic integrity (detecting AI-generated essays)
-- Content authenticity (journalism, social media)
-- Information transparency
-
-**Dataset:**
-- **DAIGT V2** from Kaggle
-- 44,868 essays total
-  - 17,497 AI-generated
-  - 27,371 human-written
-- Train/Validation/Test split: 70-15-15
-""")
-
-st.markdown("---")
-
-st.header("Methodology")
-
-st.markdown("""
-### Feature Engineering
-
-**1. TF-IDF Vectorization (Word-level)**
-- Max features: 10,000
-- N-gram range: (1,3)
-- Captures word frequency patterns
-
-**2. Character N-gram Features**
-- Max features: 5,000
-- N-gram range: (2,5)
-- Captures character-level patterns
-
-**3. Text Statistics**
-- Essay length, word count, sentence count
-- Average word length, type-token ratio
-- Readability scores (Flesch Reading Ease, Flesch-Kincaid Grade)
-- Punctuation, uppercase, digit counts
-
-### Model Selection
-
-**Baseline:** Logistic Regression
-- Fast, interpretable
-- Good baseline for comparison
-
-**Primary Model:** XGBoost
-- Gradient boosting algorithm
-- Handles feature interactions well
-- Provides feature importance
-- Superior performance on this task
-
-### Hyperparameter Tuning
-- GridSearchCV with 3-fold cross-validation
-- Optimized for F1-Score
-- Parameters tuned:
-  - n_estimators, max_depth, learning_rate
-  - subsample, colsample_bytree
-""")
-
-st.markdown("---")
-
-st.header("Evaluation Metrics")
-
-st.markdown("""
-### Primary Metrics
-- **F1-Score**: Balanced precision-recall metric
-- **ROC-AUC**: Threshold-agnostic performance metric
-
-### Secondary Metrics
-- **Accuracy**: Overall correctness
-- **Precision**: False positive rate (minimize AI flagged as human)
-- **Recall**: False negative rate (minimize human flagged as AI)
-
-**Academic Context:** Recall prioritized because false negatives (missing AI-generated text) are riskier than false positives.
-""")
-
-st.markdown("---")
-
-st.header("How to Use This App")
-
-st.markdown("""
-1. **📊 EDA Dashboard**
-   - Explore dataset statistics
-   - View class distribution and text length analysis
-   - Examine word clouds and n-gram patterns
-
-2. **🎯 Model Demo**
-   - Input custom text
-   - Get real-time prediction (Human/AI)
-   - See confidence scores
-
-3. **📈 Evaluation**
-   - View confusion matrix and ROC curve
-   - Compare baseline vs tuned models
-   - Review all performance metrics
-
-4. **🔍 Interpretation**
-   - Explore SHAP feature importance
-   - Identify key linguistic patterns
-   - Understand model decisions
-
-5. **📚 Documentation**
-   - Project overview and motivation
-   - Methodology and models used
-   - Evaluation framework
-""")
-
-st.markdown("---")
-
-st.header("Technical Stack")
-
-col1, col2 = st.columns(2)
+col1, col2 = st.columns(2, gap="large")
 
 with col1:
     st.markdown("""
-    **Data Processing:**
-    - Pandas
-    - NumPy
-    - Scikit-learn
-    
-    **Machine Learning:**
-    - XGBoost
-    - Scikit-learn
-    - SHAP
-    """)
+    <div class='doc-card'>
+        <h4 class='doc-title'>📁 DAIGT V2 Dataset</h4>
+        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Total Samples:</strong> 44,868 essays</p>
+        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Human Written:</strong> 27,371 (61.0%)</p>
+        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>AI Generated:</strong> 17,497 (39.0%)</p>
+        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Split:</strong> 70% Train, 15% Val, 15% Test</p>
+        <p style='margin: 0.5rem 0; color: #4a4a4a;'><strong>Source:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>Kaggle - DAIGT V2</a></p>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-    **Visualization:**
-    - Matplotlib
-    - Seaborn
-    - Plotly
-    
-    **Deployment:**
-    - Streamlit
-    - Joblib
-    """)
+    <div class='doc-card'>
+        <h4 class='doc-title'>🔍 Data Characteristics</h4>
+        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+            <li>Multiple AI sources (GPT, Claude, dll)</li>
+            <li>Diverse essay topics</li>
+            <li>Varied writing styles</li>
+            <li>Real-world academic context</li>
+            <li>No missing values or duplicates</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.markdown("---")
-
-st.header("Key Findings")
-
-st.info("""
-**Linguistic Patterns Distinguishing AI from Human Text:**
-
-1. **Consistency**: AI text often exhibits unnaturally high consistency
-2. **Vocabulary**: AI tends to use more formal, less varied vocabulary
-3. **Punctuation**: Distinctive punctuation patterns
-4. **Readability**: Different readability metrics compared to human writing
-5. **Word Distribution**: Unusual n-gram patterns compared to natural text
-
-The model captures these patterns to make predictions with high accuracy.
-""")
-
-st.markdown("---")
-
-st.header("References")
+st.markdown("<h2 class='section-title'>⚙️ Methodology</h2>", unsafe_allow_html=True)
 
 st.markdown("""
-- Dataset: [DAIGT V2 - Kaggle](https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset)
-- XGBoost: [Documentation](https://xgboost.readthedocs.io/)
-- SHAP: [Documentation](https://shap.readthedocs.io/)
-- Streamlit: [Documentation](https://docs.streamlit.io/)
-""")
+<div class='doc-card'>
+    <h4 class='doc-title'>Feature Engineering Pipeline</h4>
+    <div class='info-section'>
+        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>1. TF-IDF Vectorization (Word-level)</p>
+        <ul style='margin-left: 20px; color: #4a4a4a;'>
+            <li>5,000 features | N-grams (1-2)</li>
+            <li>Captures word frequency patterns</li>
+            <li>Stop words removed</li>
+        </ul>
+        
+        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>2. Character N-grams</p>
+        <ul style='margin-left: 20px; color: #4a4a4a;'>
+            <li>3,000 features | N-grams (2-4)</li>
+            <li>Captures character-level patterns</li>
+            <li>Robust to typos and variations</li>
+        </ul>
+        
+        <p style='margin: 0.8rem 0; color: #1a1a1a; font-weight: 600;'>3. Total: 8,000 Combined Features</p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>🤖 Model Architecture</h2>", unsafe_allow_html=True)
+
+col1, col2 = st.columns(2, gap="large")
+
+with col1:
+    st.markdown("""
+    <div class='doc-card'>
+        <h4 class='doc-title'>📊 Baseline: Logistic Regression</h4>
+        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+            <li>Fast training & inference</li>
+            <li>Highly interpretable</li>
+            <li>F1-Score: 99.21%</li>
+            <li>ROC-AUC: 99.93%</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class='doc-card'>
+        <h4 class='doc-title'>🏆 Primary: XGBoost</h4>
+        <ul style='margin-left: 20px; line-height: 1.8; color: #4a4a4a;'>
+            <li>Gradient boosting algorithm</li>
+            <li>Handles non-linearity well</li>
+            <li>F1-Score: 98.52%</li>
+            <li>ROC-AUC: 99.88%</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>📈 Performance Metrics</h2>", unsafe_allow_html=True)
+
+st.markdown("""
+<div class='doc-card'>
+    <div class='metric-grid'>
+        <div class='metric-item'>
+            <div class='metric-value'>98.52%</div>
+            <div class='metric-label'>F1-Score</div>
+        </div>
+        <div class='metric-item'>
+            <div class='metric-value'>99.88%</div>
+            <div class='metric-label'>ROC-AUC</div>
+        </div>
+        <div class='metric-item'>
+            <div class='metric-value'>98.86%</div>
+            <div class='metric-label'>Accuracy</div>
+        </div>
+        <div class='metric-item'>
+            <div class='metric-value'>98.52%</div>
+            <div class='metric-label'>Recall</div>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>🛠️ Tech Stack</h2>", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3, gap="medium")
+
+with col1:
+    st.markdown("""
+    <div class='doc-card'>
+        <h4 class='doc-title'>🐍 Python Libraries</h4>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Pandas, NumPy</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Scikit-learn</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• XGBoost</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• SHAP</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div class='doc-card'>
+        <h4 class='doc-title'>📊 Visualization</h4>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Matplotlib</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Seaborn</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Plotly</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• WordCloud</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+    <div class='doc-card'>
+        <h4 class='doc-title'>🚀 Deployment</h4>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Streamlit</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Joblib</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• GitHub</p>
+        <p style='color: #4a4a4a; margin: 0.3rem 0;'>• Streamlit Cloud</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>🚀 Quick Start Guide</h2>", unsafe_allow_html=True)
+
+st.markdown("""
+<div class='doc-card'>
+    <h4 class='doc-title'>Installation & Setup</h4>
+    <div class='code-box'>
+git clone https://github.com/username/ai-text-detection.git<br>
+cd ai-text-detection<br>
+pip install -r requirements.txt<br>
+streamlit run app/app.py
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<h2 class='section-title'>📞 Resources</h2>", unsafe_allow_html=True)
+
+st.markdown("""
+<div class='doc-card'>
+    <h4 class='doc-title'>📚 References & Links</h4>
+    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>Dataset:</strong> <a href='https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset' target='_blank' style='color: #2563eb;'>DAIGT V2 - Kaggle</a></p>
+    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>XGBoost:</strong> <a href='https://xgboost.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>SHAP:</strong> <a href='https://shap.readthedocs.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+    <p style='margin: 0.8rem 0; color: #4a4a4a;'><strong>Streamlit:</strong> <a href='https://docs.streamlit.io/' target='_blank' style='color: #2563eb;'>Documentation</a></p>
+</div>
+""", unsafe_allow_html=True)
