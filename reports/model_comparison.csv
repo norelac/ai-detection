@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1-Score,ROC-AUC
+Logistic Regression,0.9921,0.9921,0.9921,0.9921,0.9993
+XGBoost (Default),0.9854,0.9854,0.9854,0.9854,0.9988
+XGBoost (Tuned),0.9886,0.9852,0.9852,0.9852,0.9988
