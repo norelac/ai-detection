@@ -2,9 +2,9 @@
 data/raw/*.csv
 *.zip
 
-# Models
-models/*.pkl
-models/*.joblib
+# Models (keep best_model.pkl and preprocessing.pkl for deployment)
+# models/*.pkl
+# models/*.joblib
 
 # Python
 __pycache__/

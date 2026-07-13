@@ -1,203 +1,271 @@
-# AI-Generated Text Detection Project
+# 🤖 AI-Generated Text Detection
 
-Proyek machine learning untuk mendeteksi apakah sebuah teks ditulis oleh manusia atau dihasilkan oleh AI menggunakan dataset DAIGT V2.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.58%2B-red.svg)](https://streamlit.io/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-orange.svg)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0%2B-green.svg)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/SHAP-0.42%2B-purple.svg)](https://shap.readthedocs.io/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🎯 Tujuan Proyek
-
-Membangun model klasifikasi biner yang dapat membedakan teks manusia vs AI-generated dengan akurasi tinggi, menggunakan pola linguistik dan fitur teks statistik.
-
-**Metrik Kesuksesan:**
-- F1-Score dan ROC-AUC sebagai metrik utama
-- Recall > Precision (false negatives lebih berisiko dalam konteks akademik)
-
-## 📊 Dataset
-
-**DAIGT V2 Train Dataset** (Kaggle)
-- 44,868 esai total
-  - 17,497 AI-generated
-  - 27,371 human-written
-- Split: 70% train, 15% validation, 15% test
-- Kolom utama: `text` (isi esai), `label` (0=manusia, 1=AI)
-
-## 🛠️ Tech Stack
-
-| Kategori | Library |
-|----------|---------|
-| Bahasa | Python 3.8+ |
-| Data | Pandas, NumPy |
-| ML | Scikit-learn, XGBoost |
-| Interpretasi | SHAP |
-| Visualisasi | Matplotlib, Seaborn, Plotly |
-| Deployment | Streamlit |
-
-## 📁 Struktur Proyek
-
-```
-data/
-  raw/                 # Dataset DAIGT V2 dari Kaggle
-  processed/           # Train/val/test splits setelah preprocessing
-notebooks/
-  01_eda.ipynb         # EDA dan analisis data
-  02_modeling.ipynb    # Training model & evaluasi
-  03_interpretation.ipynb  # Analisis SHAP
-src/
-  data_preprocessing.py     # TF-IDF, character n-gram, text statistics
-  train_model.py            # Training Logistic Regression + XGBoost
-  evaluate_model.py         # Evaluasi metrik dan visualisasi
-  utils.py                  # Fungsi utilitas
-models/
-  best_model.pkl       # Model XGBoost terbaik
-  preprocessing.pkl    # TF-IDF vectorizer pipeline
-app/
-  app.py               # Streamlit main entry point
-  pages/               # 5 halaman dashboard
-  assets/              # Images, CSS
-requirements.txt
-README.md
-.gitignore
-```
-
-## 🚀 Setup & Installation
-
-### 1. Clone Repository
-```bash
-cd "D:\PROJECT GABUTT\Pembelajaran-Mesin"
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Download Dataset
-Download DAIGT V2 dari [Kaggle](https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset) dan simpan di `data/raw/`
-
-## 📓 Workflow
-
-### Step 1: EDA dan Preprocessing
-```bash
-jupyter notebook notebooks/01_eda.ipynb
-```
-- Analisis data quality (missing values, duplicates)
-- Visualisasi distribusi class, panjang teks, n-grams
-- Feature engineering (TF-IDF + character n-grams + text statistics)
-- Simpan train/val/test splits ke `data/processed/`
-
-### Step 2: Model Training & Tuning
-```bash
-jupyter notebook notebooks/02_modeling.ipynb
-```
-- Train Logistic Regression (baseline)
-- Train XGBoost default
-- GridSearch untuk hyperparameter tuning
-- Evaluasi pada test set
-- Simpan model ke `models/best_model.pkl`
-
-### Step 3: Model Interpretation
-```bash
-jupyter notebook notebooks/03_interpretation.ipynb
-```
-- SHAP analysis untuk mengerti feature importance
-- Identifikasi n-grams dan fitur linguistik diskriminatif
-
-### Step 4: Jalankan Streamlit App
-```bash
-streamlit run app/app.py
-```
-
-## 📊 Halaman Aplikasi
-
-| Halaman | Fungsi |
-|---------|--------|
-| **Dashboard EDA** | Visualisasi data: distribusi class, panjang teks, word clouds, n-grams |
-| **Model Demo** | Input teks custom → real-time prediction + confidence score |
-| **Evaluasi Model** | Confusion matrix, ROC curve, model comparison |
-| **Interpretasi** | SHAP feature importance, dependence plots |
-| **Dokumentasi** | Penjelasan metodologi, tech stack, how-to |
-
-## 🎓 Feature Engineering
-
-### 1. TF-IDF (Word-level)
-- Max features: 10,000
-- N-gram range: (1,3)
-- Min df: 2, Max df: 0.95
-- Stop words: English
-
-### 2. Character N-grams
-- Max features: 5,000
-- N-gram range: (2,5)
-- Character-level patterns
-
-### 3. Text Statistics
-- Essay length, word count, sentence count
-- Average word length, type-token ratio
-- Flesch Reading Ease, Flesch-Kincaid Grade
-- Punctuation count, uppercase count, digit count
-
-## 🤖 Model Selection
-
-**Baseline:** Logistic Regression
-- Interpretable, fast training
-- Reference untuk comparison
-
-**Primary Model:** XGBoost
-- Gradient boosting → handles feature interactions
-- Superior performance
-- Feature importance built-in
-
-## 📈 Evaluation Metrics
-
-- **Accuracy**: Overall correctness
-- **Precision**: TP / (TP + FP) - avoid false positives
-- **Recall**: TP / (TP + FN) - avoid false negatives ⭐ (prioritas)
-- **F1-Score**: Harmonic mean of precision & recall ⭐ (primary metric)
-- **ROC-AUC**: Threshold-agnostic performance ⭐ (primary metric)
-- **Confusion Matrix**: Detailed classification breakdown
-
-## 💡 Key Insights
-
-Fitur linguistik yang membedakan AI vs Human text:
-1. **Consistency**: AI text terlalu konsisten
-2. **Vocabulary**: AI lebih formal, less varied
-3. **Punctuation**: Distinctive patterns
-4. **Readability**: Different readability metrics
-5. **N-grams**: Unusual word/character patterns
-
-## 📝 Important Notes
-
-- **Dataset sumber tunggal**: Hanya DAIGT V2, tidak ada multi-source merging
-- **Train/val/test split**: 70-15-15 dari dataset yang sama
-- **Model paths**: Selalu simpan ke `models/best_model.pkl` dan `models/preprocessing.pkl`
-- **SHAP required**: Wajib ada analisis SHAP untuk interpretasi
-- **Streamlit deployment**: Deploy ke Streamlit Community Cloud setelah testing
-
-## 📚 References
-
-- Dataset: [DAIGT V2 - Kaggle](https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset)
-- XGBoost: [Documentation](https://xgboost.readthedocs.io/)
-- SHAP: [Documentation](https://shap.readthedocs.io/)
-- Streamlit: [Documentation](https://docs.streamlit.io/)
-- Scikit-learn: [Documentation](https://scikit-learn.org/)
-
-## ✅ Checklist Sebelum Submit
-
-- [ ] Dataset DAIGT V2 di `data/raw/`
-- [ ] Train/val/test splits di `data/processed/`
-- [ ] Models tersimpan: `best_model.pkl`, `preprocessing.pkl`
-- [ ] Semua 5 halaman Streamlit berfungsi
-- [ ] EDA dan insights dokumentasi lengkap
-- [ ] SHAP analysis selesai
-- [ ] ROC curve & confusion matrix tersimpan
-- [ ] Model comparison tersimpan
-- [ ] App tested locally sebelum deploy
-- [ ] README dan documentation lengkap
-
-## 🔗 Links
-
-- Spec lengkap: `rangkuman_project_uas.md`
-- Agent guide: `AGENTS.md`
+> **Capstone Project UAS - Pembelajaran Mesin**  
+> Mendeteksi teks AI-generated vs human-written menggunakan Machine Learning end-to-end
 
 ---
 
-**Created:** 2026-07-12  
-**Last Updated:** 2026-07-12
+## 🎯 Project Overview
+
+Sistem klasifikasi biner untuk mendeteksi apakah sebuah esai ditulis oleh **manusia** atau dihasilkan oleh **AI (LLM)** seperti GPT-4, Llama, Mistral, Falcon, dll.
+
+| Metric | Value |
+|--------|-------|
+| **Best Model** | Logistic Regression |
+| **F1-Score** | 99.00% |
+| **ROC-AUC** | 99.94% |
+| **Recall (Priority)** | 98.36% |
+| **Robustness (20% perturbation)** | 96.30% recall |
+
+---
+
+## 🚀 Live Demo
+
+🌐 **Streamlit App:** [https://ai-detection-machine-learning.streamlit.app/](https://ai-detection-machine-learning.streamlit.app/)
+
+---
+
+## 📊 Dataset
+
+**DAIGT V2** (Kaggle: `thedrcat/daigt-v2-train-dataset`)
+- **44,868 essays** — 27,371 Human (61%) + 17,497 AI (39%)
+- 16 sumber LLM: GPT-3.5, GPT-4, Mistral, Llama-2, Falcon-180B, Cohere, PALM, dll.
+- Split: **70% Train / 15% Val / 15% Test** (stratified)
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│  Data Input     │───▶│  Feature Eng.    │───▶│  Model Training  │
+│  (DAIGT V2)     │    │  TF-IDF + Char   │    │  LR, NB, RF, XGB │
+└─────────────────┘    │  n-gram + Stats  │    └────────┬─────────┘
+                       └──────────────────┘             │
+                                                        ▼
+                       ┌──────────────────┐    ┌──────────────────┐
+                       │  Streamlit App   │◀───│  SHAP / Eval     │
+                       │  (5 Pages)       │    │  Robustness Test │
+                       └──────────────────┘    └──────────────────┘
+```
+
+---
+
+## ⚙️ Tech Stack
+
+| Category | Libraries |
+|----------|-----------|
+| **Language** | Python 3.8+ |
+| **Data** | Pandas, NumPy |
+| **ML** | Scikit-learn, XGBoost |
+| **Interpretability** | SHAP |
+| **Visualization** | Matplotlib, Seaborn, Plotly, WordCloud |
+| **Deployment** | Streamlit, Joblib |
+| **Experiment Tracking** | Jupyter Notebooks |
+
+---
+
+## 📁 Project Structure
+
+```
+ai-text-detection/
+├── app/                    # Streamlit Application
+│   ├── app.py              # Main entry point
+│   ├── pages/              # 5 Streamlit pages
+│   │   ├── 1_Dashboard.py
+│   │   ├── 2_Model_Demo.py
+│   │   ├── 3_Evaluation.py
+│   │   ├── 4_Interpretation.py
+│   │   └── 5_Documentation.py
+│   └── assets/             # Generated plots (10+ PNG)
+├── data/
+│   ├── raw/                # DAIGT V2 CSV (gitignored)
+│   └── processed/          # Train/Val/Test splits (gitignored)
+├── models/                 # Serialized models
+│   ├── best_model.pkl      # Logistic Regression (best)
+│   ├── preprocessing.pkl   # TF-IDF + Char TF-IDF + Scaler
+│   └── all_models.pkl      # All 4 trained models
+├── notebooks/              # Jupyter Notebooks
+│   ├── 01_eda.ipynb        # EDA & Preprocessing
+│   ├── 02_modeling.ipynb   # Modeling & Evaluation
+│   └── 03_interpretation.ipynb  # SHAP Analysis
+├── reports/
+│   ├── final_report.md     # Technical report (convert to PDF)
+│   ├── presentation_outline.md  # Presentation outline
+│   ├── model_comparison.csv
+│   └── robustness_comparison.csv
+├── src/                    # Reusable Python modules
+│   ├── data_preprocessing.py
+│   ├── train_model.py
+│   ├── evaluate_model.py
+│   └── utils.py
+├── .gitignore
+├── AGENTS.md               # Agent instructions
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.8+
+- Git
+
+### Installation
+
+```bash
+# 1. Clone repository
+git clone https://github.com/norelac/ai-detection.git
+cd ai-detection
+
+# 2. Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Download dataset (place in data/raw/)
+# Download from: https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset
+
+# 5. Run Jupyter notebooks for full pipeline
+jupyter notebook notebooks/01_eda.ipynb
+jupyter notebook notebooks/02_modeling.ipynb
+jupyter notebook notebooks/03_interpretation.ipynb
+
+# 6. Run Streamlit App
+streamlit run app/app.py
+```
+
+---
+
+## 📓 Notebooks Overview
+
+| Notebook | Description | Key Outputs |
+|----------|-------------|-------------|
+| `01_eda.ipynb` | EDA, data quality, feature engineering | Train/Val/Test splits, 5 EDA plots |
+| `02_modeling.ipynb` | Train 4 models, tuning, evaluation | Best model, comparison table, ROC/CM plots |
+| `03_interpretation.ipynb` | SHAP analysis | Feature importance, SHAP plots |
+
+---
+
+## 🤖 Models Trained
+
+| Model | F1-Score | ROC-AUC | Recall | Notes |
+|-------|----------|---------|--------|-------|
+| **Logistic Regression** | **0.9900** | **0.9994** | **0.9836** | **Best Overall** |
+| XGBoost | 0.9843 | 0.9987 | 0.9768 | Strong challenger |
+| Random Forest | 0.9686 | 0.9954 | 0.9459 | Good baseline |
+| Naive Bayes | 0.9420 | 0.9891 | 0.9276 | Fast baseline |
+
+**Best Model:** Logistic Regression (TF-IDF + Char n-gram + 12 Text Stats = 8,012 features)
+
+---
+
+## 🔬 Key Features
+
+### Feature Engineering
+- **TF-IDF (Word-level):** 5,000 features, n-gram (1,2)
+- **Character n-grams:** 3,000 features, n-gram (2,4)  
+- **Text Statistics (12):** Length, TTR, Flesch Reading Ease, Flesch-Kincaid, punctuation, case, digits, avg sentence length
+
+### Robustness Testing
+Simulated human editing of AI text (character perturbations 0-20%):
+
+| Model | Recall Drop (0% → 20%) |
+|-------|------------------------|
+| **Logistic Regression** | **2.06%** ✅ |
+| XGBoost | 5.68% |
+| Random Forest | 3.09% |
+| Naive Bayes | 4.53% |
+
+---
+
+## 🌐 Streamlit Application (5 Pages)
+
+| Page | Features |
+|------|----------|
+| **1. Dashboard EDA** | Class dist, text length, word clouds, n-grams, correlations |
+| **2. Model Demo** | Real-time prediction, confidence score, probability chart |
+| **3. Evaluation** | Model comparison, confusion matrix, ROC curves, robustness table |
+| **4. Interpretation** | SHAP summary, feature importance bars, dependence plots |
+| **5. Documentation** | Methodology, tech stack, quick start, references |
+
+---
+
+## 📈 Results Summary
+
+- **Best Model:** Logistic Regression (F1: 99.00%, ROC-AUC: 99.94%)
+- **Robustness:** Maintains >96% recall under 20% text perturbation
+- **Interpretability:** SHAP reveals AI-specific linguistic patterns (templates, placeholders, formal transitions)
+- **Deployment:** Streamlit Cloud ready, responsive UI with light/dark mode support
+
+---
+
+## 📚 Reports
+
+- **Technical Report:** `reports/final_report.md` → Convert to PDF
+- **Presentation Outline:** `reports/presentation_outline.md` → Build PPTX
+- **Model Comparison:** `reports/model_comparison.csv`
+- **Robustness Data:** `reports/robustness_comparison.csv`
+- **Feature Importance:** `reports/feature_importance.csv`
+
+---
+
+## 📋 Requirements
+
+```txt
+pandas>=1.5.0
+numpy>=1.23.0
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+shap>=0.42.0
+streamlit>=1.28.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+joblib>=1.3.0
+textstat>=0.7.3
+wordcloud>=1.9.0
+```
+
+Install: `pip install -r requirements.txt`
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 📚 References
+
+- **Dataset:** [DAIGT V2 - Kaggle](https://www.kaggle.com/datasets/thedrcat/daigt-v2-train-dataset)
+- **XGBoost:** [Documentation](https://xgboost.readthedocs.io/)
+- **SHAP:** [Documentation](https://shap.readthedocs.io/)
+- **Streamlit:** [Documentation](https://docs.streamlit.io/)
+
+---
+
+## 🤝 Acknowledgments
+
+- UDINUS - Mata Kuliah Pembelajaran Mesin (Genap 2025/2026)
+- DAIGT V2 Dataset creators
+- Open source ML community
+
+---
+
+**Built with ❤️ for UAS Pembelajaran Mesin**  
+*Last Updated: July 2026*
