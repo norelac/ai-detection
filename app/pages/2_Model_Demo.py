@@ -1,7 +1,8 @@
 import streamlit as st
 import joblib
 import numpy as np
-from scipy.sparse import hstack
+import pandas as pd
+from scipy.sparse import hstack, csr_matrix
 import plotly.graph_objects as go
 
 st.set_page_config(page_title="Model Demo", page_icon="🎯", layout="wide")
@@ -188,10 +189,39 @@ if model and preprocessing:
                 try:
                     tfidf = preprocessing['word_tfidf']
                     char_tfidf = preprocessing['char_tfidf']
+                    scaler = preprocessing['scaler']
                     
+                    # Extract TF-IDF features
                     X_tfidf = tfidf.transform([user_text])
                     X_char = char_tfidf.transform([user_text])
-                    X_combined = hstack([X_tfidf, X_char])
+                    
+                    # Extract text statistics features
+                    import textstat
+                    import re
+                    def extract_text_features(text):
+                        text = str(text)
+                        words = text.split()
+                        unique_words = set(w.lower() for w in words)
+                        return {
+                            'text_length': len(text),
+                            'word_count': len(words),
+                            'sentence_count': max(len(text.split('.')), 1),
+                            'avg_word_length': np.mean([len(w) for w in words]) if words else 0,
+                            'unique_words': len(unique_words),
+                            'type_token_ratio': len(unique_words) / len(words) if words else 0,
+                            'flesch_reading_ease': textstat.flesch_reading_ease(text),
+                            'flesch_kincaid_grade': textstat.flesch_kincaid_grade(text),
+                            'punctuation_count': len(re.findall(r'[^\w\s]', text)),
+                            'uppercase_count': sum(1 for c in text if c.isupper()),
+                            'digit_count': sum(1 for c in text if c.isdigit()),
+                            'avg_sentence_length': len(words) / max(len(text.split('.')), 1),
+                        }
+                    
+                    stats = pd.DataFrame([extract_text_features(user_text)])
+                    stats_scaled = scaler.transform(stats)
+                    stats_sparse = csr_matrix(stats_scaled)
+                    
+                    X_combined = hstack([X_tfidf, X_char, stats_sparse])
                     
                     prediction = model.predict(X_combined)[0]
                     probability = model.predict_proba(X_combined)[0]
