@@ -43,6 +43,31 @@ Tidak sekadar mengejar akurasi tinggi, tapi juga menguji seberapa robust model s
 - Visualisasi: Word cloud per kelas, distribusi panjang kalimat, korelasi fitur statistik teks
 - Feature engineering: TF-IDF/n-gram (termasuk character n-gram), fitur statistik teks (panjang esai, type-token ratio, readability score)
 
+#### 3.1.1 Distribusi Kelas & Panjang Teks
+**Gambar 1.** Distribusi Kelas (Kiri) dan Analisis Panjang Teks (Kanan)  
+![Distribusi Kelas dan Panjang Teks](../app/assets/class_distribution.png)
+*Gambar 1(a): Distribusi Kelas*  
+![Distribusi Kelas](../app/assets/class_distribution.png)  
+*Gambar 1(b): Analisis Panjang Teks*  
+![Analisis Panjang Teks](../app/assets/text_length_analysis.png)
+
+#### 3.1.2 Distribusi Sumber Data
+**Gambar 2.** Distribusi Sumber Data per Kelas  
+![Distribusi Sumber Data](../app/assets/source_distribution.png)
+
+#### 3.1.3 Word Cloud & N-gram Analysis
+**Gambar 3.** Word Cloud Perbandingan Human vs AI  
+![Word Cloud](../app/assets/wordcloud.png)  
+
+**Gambar 4.** Analisis N-gram (Unigram & Bigram) Human vs AI  
+![N-gram Analysis](../app/assets/ngram_analysis.png)
+
+#### 3.1.3 Korelasi Fitur Statistik Teks
+**Gambar 5.** Heatmap Korelasi Fitur Statistik Teks  
+![Korelasi Fitur Statistik](../app/assets/text_stats_correlation.png)
+
+---
+
 ### 3.2 Feature Engineering
 | Feature Type | Detail |
 |--------------|--------|
@@ -69,7 +94,7 @@ Tidak sekadar mengejar akurasi tinggi, tapi juga menguji seberapa robust model s
 - **Cross-validation:** 3-fold pada validation set
 
 ### 3.5 Interpretasi (SHAP)
-- TreeExplainer pada model terbaik (XGBoost/Logistic Regression)
+- LinearExplainer pada model terbaik (Logistic Regression)
 - Identifikasi n-gram/fitur linguistik paling diskriminatif
 - Visualisasi: Summary plot, Feature importance, Dependence plot
 
@@ -90,10 +115,16 @@ Tidak sekadar mengejar akurasi tinggi, tapi juga menguji seberapa robust model s
 
 > **Insight:** Logistic Regression dengan fitur gabungan (TF-IDF + Char n-gram + Text Stats) mengungguli XGBoost pada dataset ini, kemungkinan karena linear separability yang tinggi dari fitur TF-IDF + statistik teks.
 
-### 4.2 Confusion Matrix (Logistic Regression)
+### 4.2 Confusion Matrix & ROC Curve
+**Gambar 6.** Confusion Matrix Model Logistic Regression  
+![Confusion Matrix](../app/assets/confusion_matrix.png)
+
+**Gambar 7.** Perbandingan ROC Curve Semua Model  
+![ROC Curve](../app/assets/roc_curve.png)
+
 ```
-                 Predicted
-              Human    AI
+                  Predicted
+               Human    AI
 Actual Human  6620     111
 Actual AI      92     2533
 ```
@@ -114,12 +145,25 @@ Actual AI      92     2533
 | 9 | `percent` | Word n-gram | Statistik khas AI |
 | 10 | `clus` | Char n-gram | Subword teknis AI |
 
-### 4.4 Korelasi Fitur Statistik Teks
+### 4.4 SHAP Interpretasi
+**Gambar 8.** SHAP Summary Plot (Top 20 Features)  
+![SHAP Summary](../app/assets/shap_summary.png)  
+
+**Gambar 9.** Feature Importance Berdasarkan Mean |SHAP Value|  
+![Feature Importance](../app/assets/feature_importance.png)  
+
+**Gambar 9.** SHAP Dependence Plot (Fitur Teratas: `senator writing`)  
+![SHAP Dependence](../app/assets/shap_dependence.png)
+
+### 4.5 Korelasi Fitur Statistik Teks
+**Gambar 10.** Heatmap Korelasi Fitur Statistik Teks  
+![Korelasi Fitur Statistik](../app/assets/text_stats_correlation.png)
+
 - **Flesch Reading Ease** negatif korelasi dengan AI label (AI lebih sulit dibaca/formal)
 - **Type-Token Ratio** lebih rendah pada AI (kosakata kurang variatif)
 - **Avg Sentence Length** lebih konsisten pada AI
 
-### 4.5 Robustness Test (Simulasi Teks AI Diedit Manusia)
+### 4.6 Robustness Test (Simulasi Teks AI Diedit Manusia)
 Simulasi perturbasi karakter (typo, case swap) pada teks AI test set:
 
 | Model | Recall 0% | Recall 5% | Recall 10% | Recall 20% | Drop (0→20%) |
@@ -135,7 +179,7 @@ Simulasi perturbasi karakter (typo, case swap) pada teks AI test set:
 
 ## 5. Aplikasi Web (Streamlit)
 
-**URL Deploy:** `https://ai-detection.streamlit.app` (contoh)  
+**URL Deploy:** `https://ai-detection-machine-learning.streamlit.app/`  
 **Struktur 5 Halaman:**
 1. **Dashboard EDA** - Visualisasi interaktif distribusi data, word cloud, n-gram
 2. **Model Demo** - Input teks bebas → prediksi real-time + confidence score
@@ -169,7 +213,7 @@ Simulasi perturbasi karakter (typo, case swap) pada teks AI test set:
 
 ## 8. Lampiran
 
-- **Kode Sumber:** `src/`, `notebooks/`, `app/`
+- **Kode Sumber:** `src/`, `notebooks/`, `app/`, `scripts/`
 - **Model & Pipeline:** `models/best_model.pkl`, `models/preprocessing.pkl`
 - **Hasil Evaluasi:** `reports/model_comparison.csv`, `reports/robustness_comparison.csv`
 - **Visualisasi:** `app/assets/*.png` (10+ plot)
