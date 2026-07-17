@@ -215,7 +215,8 @@ Simulated human editing of AI text (character perturbations 0-20%):
 
 ## 📚 Reports
 
-- **Technical Report:** `reports/final_report.md` → Convert to PDF
+- **Technical Report (PDF):** `reports/LAPORAN UAS PEMBELAJARAN-MESIN-A11.2024.15636.pdf`
+- **Technical Report (Markdown):** `reports/final_report.md`
 - **Presentation Outline:** `reports/presentation_outline.md` → Build PPTX
 - **Model Comparison:** `reports/model_comparison.csv`
 - **Robustness Data:** `reports/robustness_comparison.csv`
