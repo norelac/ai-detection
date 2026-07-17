@@ -216,6 +216,7 @@ Simulated human editing of AI text (character perturbations 0-20%):
 ## 📚 Reports
 
 - **Technical Report (PDF):** `reports/LAPORAN UAS PEMBELAJARAN-MESIN-A11.2024.15636.pdf`
+- **Google Drive (Laporan UAS PM):** https://drive.google.com/file/d/1G0cvTceuaF5eNG0hIXN4pnu98Rsk2Hag/view?usp=sharing
 - **Model Comparison:** `reports/model_comparison.csv`
 - **Robustness Data:** `reports/robustness_comparison.csv`
 - **Feature Importance:** `reports/feature_importance.csv`
