@@ -219,7 +219,7 @@ Simulated human editing of AI text (character perturbations 0-20%):
 ### Laporan & Presentasi
 - **Laporan Proyek (PDF):** [`reports/Laporan Proyek Akhir PM_A11.2024.15636_Muhammad Iqbal Junialdi.pdf`](reports/Laporan%20Proyek%20Akhir%20PM_A11.2024.15636_Muhammad%20Iqbal%20Junialdi.pdf)
 - **PPT Presentasi (PDF):** [`reports/PPT UAS PEMBELAJARAN MESIN_A11.2024.15636.pdf`](reports/PPT%20UAS%20PEMBELAJARAN%20MESIN_A11.2024.15636.pdf)
-- **Google Drive:** https://drive.google.com/file/d/1G0cvTceuaF5eNG0hIXN4pnu98Rsk2Hag/view?usp=sharing
+- **Google Drive:** [https://drive.google.com/file/d/1G0cvTceuaF5eNG0hIXN4pnu98Rsk2Hag/view?usp=sharing](https://drive.google.com/drive/folders/1bXuh3RFW5JDODLq07AzTyU8PUTRIC20G?usp=sharing)
 
 ### Data & Analisis
 - **Model Comparison:** `reports/model_comparison.csv`
