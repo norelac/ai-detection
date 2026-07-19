@@ -97,10 +97,11 @@ ai-text-detection/
 │   ├── 02_modeling.ipynb   # Modeling & Evaluation
 │   └── 03_interpretation.ipynb  # SHAP Analysis
 ├── reports/
-│   ├── final_report.md     # Technical report (convert to PDF)
-│   ├── presentation_outline.md  # Presentation outline
+│   ├── LAPORAN PROYEK UAS PM_A11.2024.15636_Muhammad Iqbal Junialdi.pdf
+│   ├── PPT UAS PEMBELAJARAN MESIN_A11.2024.15636.pdf
 │   ├── model_comparison.csv
-│   └── robustness_comparison.csv
+│   ├── robustness_comparison.csv
+│   └── feature_importance.csv
 ├── src/                    # Reusable Python modules
 │   ├── data_preprocessing.py
 │   ├── train_model.py
@@ -215,8 +216,12 @@ Simulated human editing of AI text (character perturbations 0-20%):
 
 ## 📚 Reports
 
-- **Technical Report (PDF):** `reports/LAPORAN UAS PEMBELAJARAN-MESIN-A11.2024.15636.pdf`
-- **Google Drive (Laporan UAS PM):** https://drive.google.com/file/d/1G0cvTceuaF5eNG0hIXN4pnu98Rsk2Hag/view?usp=sharing
+### Laporan & Presentasi
+- **Laporan Proyek (PDF):** [`reports/LAPORAN PROYEK UAS PM_A11.2024.15636_Muhammad Iqbal Junialdi.pdf`](reports/LAPORAN%20PROYEK%20UAS%20PM_A11.2024.15636_Muhammad%20Iqbal%20Junialdi.pdf)
+- **PPT Presentasi (PDF):** [`reports/PPT UAS PEMBELAJARAN MESIN_A11.2024.15636.pdf`](reports/PPT%20UAS%20PEMBELAJARAN%20MESIN_A11.2024.15636.pdf)
+- **Google Drive:** https://drive.google.com/file/d/1G0cvTceuaF5eNG0hIXN4pnu98Rsk2Hag/view?usp=sharing
+
+### Data & Analisis
 - **Model Comparison:** `reports/model_comparison.csv`
 - **Robustness Data:** `reports/robustness_comparison.csv`
 - **Feature Importance:** `reports/feature_importance.csv`
